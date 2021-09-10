@@ -63,7 +63,13 @@ punt_trim <- function(punts, columns=NULL) {
                       "punt_in_endzone","punt_out_of_bounds", "punt_downed", "punt_fair_catch",
                       "punt_attempt", "punter_player_id", "punter_player_name", "punt_returner_player_id",
                       "punt_returner_player_name", "return_yards", "season", "season_type", "week",
-                      "touchdown", "td_team", "temp", "roof")
+                      "touchdown", "td_team", "temp", "roof",
+                    ##### NEW COLUMNS
+                    "surface","wind","play_clock","weather","game_stadium","time_of_day",
+                    "half_seconds_remaining","game_seconds_remaining",
+                    "posteam_timeouts_remaining","defteam_timeouts_remaining",
+                    "score_differential","series","drive_play_count","drive_time_of_possession",
+                    "home_coach","away_coach")
 
   if(!is.null(columns))  {
     punt_columns <- c(punt_columns, columns)
