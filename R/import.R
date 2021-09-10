@@ -21,13 +21,13 @@ import_punts <- function(years, local = FALSE, path = NULL) {
   if(local == TRUE) {
     #message(glue("puntr::import_punts - Importing locally from {path}"))
     punts <- years %>%
-      purrr::map_df(import_local_season, path)
+      furrr::future_map_dfr(import_local_season, path)
     return(punts)
   } else if(local == FALSE) {
     #message("puntr::import_punts - Importing from https://raw.githubusercontent.com/Puntalytics/puntr-data/master/data/
 #For faster import, clone this repo locally and use local = TRUE")
     punts <- years %>%
-      purrr::map_df(import_one_season, 'https://raw.githubusercontent.com/Puntalytics/puntr-data/master/data/punts_')
+      furrr::future_map_dfr(import_one_season, 'https://raw.githubusercontent.com/Puntalytics/puntr-data/master/data/punts_')
     return(punts)
   } else { stop("'local' must be TRUE or FALSE")}
 
@@ -45,7 +45,7 @@ import_punts <- function(years, local = FALSE, path = NULL) {
 #' @export
 import_seasons <- function(years) {
   pbp <- years %>%
-    purrr::map_df(import_one_season, 'https://raw.githubusercontent.com/guga31bb/nflfastR-data/master/data/play_by_play_')
+    furrr::future_map_dfr(import_one_season, 'https://raw.githubusercontent.com/guga31bb/nflfastR-data/master/data/play_by_play_')
   return(pbp)
 }
 
